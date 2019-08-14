@@ -1,13 +1,11 @@
-﻿<a name="title" />
+
 # Overview of Web API backend from GeekQuiz #
 
 ---
-<a name="Overview" />
 ## Overview ##
 
 In this demo you will walk through the process of building GeekQuiz backend. It'll be implemented using ASP.NET Web API to create a controller with two operations; Get, which returns the next question relying on the QuestionService for data access and Post to store the given answer using the AnswerService for data access.
 
-<a id="goals" />
 ### Goals ###
 
 In this demo, you will see how to:
@@ -16,14 +14,13 @@ In this demo, you will see how to:
 1. Implement a Get operation in the Web API controller
 1. Implement a Post operation in the Web API controller
 
-<a name="technologies" />
 ### Key Technologies ###
 
 - [ASP.NET Web API][1]
 
 [1]: www.asp.net/web-api
 
-<a name="Setup" />
+
 ### Setup and Configuration ###
 
 In order to execute this demo you need to set up your environment.
@@ -43,7 +40,7 @@ In order to execute this demo you need to set up your environment.
 
 1. In Visual Studio, close all open files.
 
-<a name="Demo" />
+
 ## Demo ##
 
 This demo is composed of the following segments:
@@ -51,7 +48,7 @@ This demo is composed of the following segments:
 1. [Create the TriviaController](#segment1).
 1. [Run the solution](#segment2).
 
-<a name="segment1" />
+
 ### Create the TriviaController ###
 
 1. Right-click the **Controllers** folder, expand the **Add** menu and click **Controller...** in order to create a new **TriviaController**.
@@ -74,51 +71,51 @@ This demo is composed of the following segments:
 
 1. Implement the controller using the following code.
 
-	<!-- mark:3-18 -->
+
 	````C#
-    public class TriviaController : ApiController
-    {
-        private TriviaContext db;
-        private QuestionsService questionsService;
-        private AnswersService answersService;
+	    public class TriviaController : ApiController
+	    {
+	        private TriviaContext db;
+	        private QuestionsService questionsService;
+	        private AnswersService answersService;
 
-        public TriviaController()
-        {
-            this.db = new TriviaContext();
-            this.questionsService = new QuestionsService(db);
-            this.answersService = new AnswersService(db);
-        }
+	        public TriviaController()
+	        {
+	            this.db = new TriviaContext();
+	            this.questionsService = new QuestionsService(db);
+	            this.answersService = new AnswersService(db);
+	        }
 
-        protected override void Dispose(bool disposing)
-        {
-            this.db.Dispose();
-            base.Dispose(disposing);
-        }
-    }
-````
+	        protected override void Dispose(bool disposing)
+	        {
+	            this.db.Dispose();
+	            base.Dispose(disposing);
+	        }
+	    }
+	    ````
+
 
 1. Add the following using statements.
 
-	<!-- mark:1-2 -->
 	````C#
-	using GeekQuiz.Models;
-	using GeekQuiz.Services;
+		using GeekQuiz.Models;
+		using GeekQuiz.Services;
 	````
+	
 
 1. Add the `Authorize` attribute to the TriviaController.
 
-	<!-- mark:3 -->
 	````C#
-	namespace GeekQuiz.Controllers
-	{
-		 [Authorize]
-		 public class TriviaController : ApiController
-		 {
+		namespace GeekQuiz.Controllers
+		{
+			 [Authorize]
+			 public class TriviaController : ApiController
+		{
 	````
+
 
 1. Add the following code to create a **Get** action in the **TriviaController**.
 
-	<!-- mark:1-14 -->
 	````C#
 	public async Task<TriviaQuestion> Get()
 	{
@@ -134,13 +131,12 @@ This demo is composed of the following segments:
 
 		return nextQuestion;
 	}
-````
+	````
 
 1. Resolve the missing _using_ statements for **Task**.
 
 1. Add the **Post** method from the following code snippet just after the **Get** method.
 
-	<!-- mark:1-15 -->
 	````C#
 	public async Task<HttpResponseMessage> Post(TriviaAnswer answer)
     {
@@ -157,11 +153,11 @@ This demo is composed of the following segments:
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
         }
     }
-````
+	````
 
 1. Build the solution.
 
-<a name="segment2" />
+
 ### Run the solution ###
 
 1. Set breakpoints on the first line of the **Get** and **Post** methods.
@@ -198,7 +194,7 @@ This demo is composed of the following segments:
 
 ---
 
-<a name="summary" />
+
 ## Summary ##
 
 By completing this demo you should have:
